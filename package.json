@@ -96,8 +96,6 @@
     "nodes": {
       "lwm2m": "dist/lwm2m.js"
     }
-  },
-  "bundleDependencies": [
-    "node-pre-gyp"
-  ]
+    }
+  
 }

@@ -1,6 +1,9 @@
 Node-RED node for OMA LwM2M
 ===
 
+**Modernized for Node.js 20+ and latest build/test tools**
+
+
 [![GitHub release](https://img.shields.io/github/release/CANDY-LINE/node-red-contrib-lwm2m.svg)](https://github.com/CANDY-LINE/node-red-contrib-lwm2m/releases/latest)
 [![master Build Status](https://travis-ci.org/CANDY-LINE/node-red-contrib-lwm2m.svg?branch=master)](https://travis-ci.org/CANDY-LINE/node-red-contrib-lwm2m/)
 [![License MIT](https://img.shields.io/github/license/CANDY-LINE/node-red-contrib-lwm2m.svg)](http://opensource.org/licenses/Apache-2.0)
@@ -461,9 +464,28 @@ bus.once('object-read-022eb56240784b43', (msg) => {
 
 This node should work on Unix and Linux OS. Windows is not supported.
 
+
 # Supported Node.js version
 
-Node.js v10/12
+Node.js v20 and later (v10/12 no longer supported)
+
+# Modernized Build & Test System
+
+- Uses Gulp 5, Babel 7, Mocha 11+, Sinon 21+, Chai 6+
+- All build/test/dev dependencies are up-to-date for security and compatibility
+- Native addon is Node-API (N-API) based for Node.js 20+ compatibility
+
+## Build JS code
+
+```sh
+$ npm run build
+```
+
+## Run tests
+
+```sh
+$ npm test
+```
 
 # How to install
 
@@ -514,29 +536,32 @@ You can import example flows available under `examples` folder on Node-RED UI.
 
 # Appendix
 
+
 ## How to build from source
 
-Install dependencies.
+Install dependencies:
 
-```
+```sh
 $ npm install
 ```
 
-Then run the following commands to build source code.
+Build native code (optional, only if you need to rebuild the C++ addon):
 
-```
-# make configure  # Configure the build
-$ make debugbuild # Build for Debug
+```sh
+$ make configure  # Configure the build
 $ make build      # Build for Release
-
-$ make debug      # Rebuild for Debug
-$ make verbose    # Rebuild with verbose logs for Release
 ```
 
-In order to build JS code, run the following commands.
+Build JS code:
 
-```
+```sh
 $ npm run build
+```
+
+Run tests:
+
+```sh
+$ npm test
 ```
 
 ## Eclipse Wakaama LwM2M Server

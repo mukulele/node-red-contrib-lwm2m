@@ -29,6 +29,4 @@
 #include <sstream>
 #include <functional>
 
-#include <nan.h>
 
-using namespace v8;

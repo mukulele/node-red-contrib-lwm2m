@@ -19,9 +19,9 @@ const gulp        = require('gulp');
 const noop        = require("gulp-noop");
 const babel       = require('gulp-babel');
 const uglify      = require('gulp-uglify');
-const del         = require('del');
+const del         = require('del').deleteAsync;
 const jshint      = require('gulp-jshint');
-const mocha       = require('gulp-mocha');
+const mocha       = require('gulp-mocha').default;
 const sourcemaps  = require('gulp-sourcemaps');
 const gulpif      = require('gulp-if');
 const htmlmin     = require('gulp-htmlmin');
@@ -77,9 +77,7 @@ gulp.task('js', gulp.series('assets', () => {
   return gulp.src('./lib/**/*.js')
     .pipe(gulpif(sourcemapEnabled, sourcemaps.init(), noop()))
     .pipe(babel({
-      minified: minified,
-      compact: minified,
-      presets: ["env"],
+      presets: ["@babel/preset-env"],
       plugins: ['add-module-exports']
     }))
     .pipe(gulpif(!sourcemapEnabled, uglify({
@@ -138,7 +136,7 @@ gulp.task('testJs', gulp.series('cleanTestJs', 'build', () => {
   return gulp.src('./tests/**/*.js')
     .pipe(sourcemaps.init())
     .pipe(babel({
-      presets: ['env'],
+      presets: ['@babel/preset-env'],
       plugins: ['add-module-exports']
     }))
     .pipe(sourcemaps.write('.'))

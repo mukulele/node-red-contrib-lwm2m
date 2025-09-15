@@ -44,7 +44,7 @@ describe('LwM2MObjectStore', () => {
   let opts;
   let store;
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     opts = new EventEmitter();
   });
   afterEach(() => {
@@ -427,7 +427,7 @@ describe('ResourceRepositoryBuilder', () => {
   let sandbox;
   let client;
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     client = sandbox.stub(new LwM2MClientProxy());
   });
   afterEach(() => {
@@ -686,7 +686,7 @@ describe('RequestHandler', () => {
   let sandbox;
   let client;
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
     client = sandbox.stub(new LwM2MClientProxy());
   });
   afterEach(() => {
@@ -743,7 +743,7 @@ describe('RequestHandler', () => {
 describe('Resource', () => {
   let sandbox;
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
   });
   afterEach(() => {
     sandbox.restore();

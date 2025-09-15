@@ -26,16 +26,12 @@
 #define DP(format, ...)
 #endif /* LWM2M_WITH_LOGS */
 
-using namespace v8;
 
-namespace {
+#include <napi.h>
 
-NAN_MODULE_INIT(RegisterModule) {
-  DP("(%s) Loading module ...", __FUNCTION__);
+Napi::Object Init(Napi::Env env, Napi::Object exports) {
   // Future Use
-  DP("(%s) Done", __FUNCTION__);
+  return exports;
 }
 
-}
-
-NODE_MODULE(node_lwm2m, RegisterModule)
+NODE_API_MODULE(node_lwm2m, Init)

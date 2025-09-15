@@ -35,7 +35,7 @@ const expect = chai.expect;
 describe('LWM2M_OBJECT_ID', () => {
   let sandbox;
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
   });
   afterEach(() => {
     sandbox.restore();
@@ -57,7 +57,7 @@ describe('LWM2M_OBJECT_ID', () => {
 describe('LWM2M_TYPE', () => {
   let sandbox;
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
   });
   afterEach(() => {
     sandbox.restore();
@@ -80,7 +80,7 @@ describe('LWM2M_TYPE', () => {
 describe('ACL', () => {
   let sandbox;
   beforeEach(() => {
-    sandbox = sinon.sandbox.create();
+    sandbox = sinon.createSandbox();
   });
   afterEach(() => {
     sandbox.restore();

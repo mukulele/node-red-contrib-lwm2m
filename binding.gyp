@@ -9,8 +9,8 @@
     {
       'target_name': '<(module_name)',
       'include_dirs': [
-        '<!(node -e "require(\'nan\')")',
         '<(src_dir)',
+        'node_modules/node-addon-api',
       ],
       'dependencies': [
         '<(deps_dir)/wakatiwai/wakatiwai.gyp:wakatiwaiclient',
@@ -20,9 +20,11 @@
       'sources': [
         '<(src_dir)/node_lwm2m.cc',
       ],
+      'napi_build_version': 8,
       'cflags_cc': [
       ],
       'defines': [
+        'NODE_ADDON_API_DISABLE_CPP_EXCEPTIONS',
       ],
     },
     {

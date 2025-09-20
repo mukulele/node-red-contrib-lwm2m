@@ -10,7 +10,7 @@ Node-RED node for OMA LwM2M
 
 This node offers OMA LwM2M client functionalities and allows you to create your own OMA LwM2M client applications on top of Node-RED.
 
-This node internally spawns a [`wakatiwaiclient`](https://github.com/CANDY-LINE/wakatiwai) process, which is a revised version of [Eclipse Wakaama](https://github.com/eclipse/wakaama) executable, and starts inter-process communication (IPC) over stdin and stdout. The [`wakatiwaiclient`](https://github.com/CANDY-LINE/wakatiwai) executable is slightly different from [Wakaama](https://github.com/eclipse/wakaama)'s implementation, some of management objects are stripped. This node allows you to describe your own management objects as well.
+This node internally spawns a [`wakatiwaiclient`](https://github.com/mukulele/wakatiwai) process, which is a revised version of [Eclipse Wakaama](https://github.com/eclipse/wakaama) executable, and starts inter-process communication (IPC) over stdin and stdout. The [`wakatiwaiclient`](https://github.com/mukulele/wakatiwai) executable is slightly different from [Wakaama](https://github.com/eclipse/wakaama)'s implementation, some of management objects are stripped. This node allows you to describe your own management objects as well.
 
 When the parent process (i.e. Node-RED) exits, this node tries to emit a De-registration message to LwM2M server so that the server knows the client is gone.
 
@@ -18,7 +18,8 @@ This node restarts a new process when the child process exits after a given inte
 
 CoAP over DTLS is supported but disabled by default. Users are able to enable DTLS if necessary. However, supported security mechanism is only pre-shared key(PSK). RPK and X.509 are not supported.
 
-The supported message format is `TLV` rather than ~~`JSON`~~.
+npm audit fix
+ rather than `JSON`.
 
 **Security Notice:**
 
@@ -323,12 +324,11 @@ Here's an example for providing the predefined manufacturer name.
                 '0': {
                     '0': 'ACME Corporation'
                 }
-            }
-        },
-        objectDefinitions: {
-            '123456': {
-                '0': 'My String',
-                '1': 9876
+            },
+            '99999': {
+                '0': {
+                    '0': 'ABCD'
+                }
             }
         }
     }

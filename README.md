@@ -335,6 +335,203 @@ Here's an example for providing the predefined manufacturer name.
 }
 ```
 
+### Example Maritime Configuration
+
+For maritime and vessel monitoring applications, here's a comprehensive configuration using standard IPSO objects:
+
+`settings.js`
+```
+{
+    lwm2m: {
+        emptyValue: 'auto',
+        objects: {
+            // Temperature Sensors (3303) - Engine, Cabin, Sea Water
+            '3303': {
+                '0': {  // Engine Temperature
+                    '0': 'Marine Engine Monitor',
+                    '1': 'MET-300-Marine',
+                    '5700': { "type": "FLOAT", "value": 0 },  // Sensor Value
+                    '5701': 'Cel',                            // Units
+                    '5602': 120.0,                           // Max Range
+                    '5603': -20.0,                           // Min Range
+                    '5518': { "type": "INTEGER", "value": 0 } // Timestamp
+                },
+                '1': {  // Cabin Temperature
+                    '0': 'Cabin Climate Sensor',
+                    '1': 'MCS-200-Marine',
+                    '5700': { "type": "FLOAT", "value": 0 },
+                    '5701': 'Cel',
+                    '5602': 50.0,
+                    '5603': -10.0,
+                    '5518': { "type": "INTEGER", "value": 0 }
+                },
+                '2': {  // Sea Water Temperature
+                    '0': 'Sea Water Sensor',
+                    '1': 'SWS-100-Marine',
+                    '5700': { "type": "FLOAT", "value": 0 },
+                    '5701': 'Cel',
+                    '5602': 35.0,
+                    '5603': -5.0,
+                    '5518': { "type": "INTEGER", "value": 0 }
+                }
+            },
+
+            // Humidity Sensors (3304) - Cabin, Engine Room
+            '3304': {
+                '0': {  // Cabin Humidity
+                    '0': 'Cabin Humidity Sensor',
+                    '1': 'CHS-200-Marine',
+                    '5700': { "type": "FLOAT", "value": 0 },
+                    '5701': '%RH',
+                    '5602': 100.0,
+                    '5603': 0.0,
+                    '5518': { "type": "INTEGER", "value": 0 }
+                },
+                '1': {  // Engine Room Humidity
+                    '0': 'Engine Room Humidity',
+                    '1': 'ERH-300-Marine',
+                    '5700': { "type": "FLOAT", "value": 0 },
+                    '5701': '%RH',
+                    '5602': 100.0,
+                    '5603': 0.0,
+                    '5518': { "type": "INTEGER", "value": 0 }
+                }
+            },
+
+            // Accelerometer (3313) - Vessel Motion
+            '3313': {
+                '0': {  // Vessel Motion Sensor
+                    '0': 'Vessel Motion Sensor',
+                    '1': 'VMS-400-Marine',
+                    '5702': { "type": "FLOAT", "value": 0 },  // X Value
+                    '5703': { "type": "FLOAT", "value": 0 },  // Y Value
+                    '5704': { "type": "FLOAT", "value": 0 },  // Z Value
+                    '5701': 'm/s2',                           // Units
+                    '5518': { "type": "INTEGER", "value": 0 } // Timestamp
+                }
+            },
+
+            // GPS Location (6)
+            '6': {
+                '0': {  // Primary GPS
+                    '0': { "type": "FLOAT", "value": 0 },     // Latitude
+                    '1': { "type": "FLOAT", "value": 0 },     // Longitude
+                    '2': { "type": "FLOAT", "value": 0 },     // Altitude
+                    '3': { "type": "FLOAT", "value": 0 },     // Radius/Accuracy
+                    '4': { "type": "OPAQUE", "value": "" },   // Velocity
+                    '5': { "type": "INTEGER", "value": 0 }    // Timestamp
+                }
+            },
+
+            // Energy Meter (3331) - Battery, Solar, Shore Power
+            '3331': {
+                '0': {  // Main Battery Bank
+                    '0': 'Marine Battery Monitor',
+                    '1': 'MBM-400-Marine',
+                    '5805': { "type": "FLOAT", "value": 0 },  // Cumulative Energy (Wh)
+                    '5806': { "type": "FLOAT", "value": 0 },  // Active Power (W)
+                    '5820': { "type": "FLOAT", "value": 1 },  // Power Factor
+                    '5518': { "type": "INTEGER", "value": 0 } // Timestamp
+                },
+                '1': {  // Solar Panel Generation
+                    '0': 'Marine Solar Monitor',
+                    '1': 'MSM-200-Marine',
+                    '5805': { "type": "FLOAT", "value": 0 },
+                    '5806': { "type": "FLOAT", "value": 0 },
+                    '5820': { "type": "FLOAT", "value": 1 },
+                    '5518': { "type": "INTEGER", "value": 0 }
+                },
+                '2': {  // Shore Power Monitoring
+                    '0': 'Shore Power Monitor',
+                    '1': 'SPM-110-Marine',
+                    '5805': { "type": "FLOAT", "value": 0 },
+                    '5806': { "type": "FLOAT", "value": 0 },
+                    '5820': { "type": "FLOAT", "value": 1 },
+                    '5518': { "type": "INTEGER", "value": 0 }
+                }
+            },
+
+            // Power Measurement (3328) - Real-time Power Monitoring
+            '3328': {
+                '0': {  // Engine Power
+                    '0': 'Engine Power Monitor',
+                    '1': 'EPM-300-Marine',
+                    '5700': { "type": "FLOAT", "value": 0 },  // Current Power (W)
+                    '5701': 'W',                              // Units
+                    '5602': 5000.0,                          // Max Range (W)
+                    '5603': 0.0,                             // Min Range (W)
+                    '5518': { "type": "INTEGER", "value": 0 } // Timestamp
+                },
+                '1': {  // Electronics Power
+                    '0': 'Electronics Power Monitor',
+                    '1': 'EPM-100-Marine',
+                    '5700': { "type": "FLOAT", "value": 0 },
+                    '5701': 'W',
+                    '5602': 1000.0,
+                    '5603': 0.0,
+                    '5518': { "type": "INTEGER", "value": 0 }
+                },
+                '2': {  // Lighting Power
+                    '0': 'Lighting Power Monitor',
+                    '1': 'LPM-50-Marine',
+                    '5700': { "type": "FLOAT", "value": 0 },
+                    '5701': 'W',
+                    '5602': 500.0,
+                    '5603': 0.0,
+                    '5518': { "type": "INTEGER", "value": 0 }
+                }
+            },
+
+            // Digital I/O (3200) - Switches and Controls
+            '3200': {
+                '0': {  // Bilge Pump Switch
+                    '0': 'Bilge Pump Control',
+                    '1': 'BPC-12V-Marine',
+                    '5500': { "type": "BOOLEAN", "value": false }, // Input State
+                    '5550': { "type": "BOOLEAN", "value": false }, // Output State
+                    '5750': 'Bilge Pump',                          // Application Type
+                    '5518': { "type": "INTEGER", "value": 0 }      // Timestamp
+                },
+                '1': {  // Navigation Lights
+                    '0': 'Navigation Light Control',
+                    '1': 'NLC-24V-Marine',
+                    '5500': { "type": "BOOLEAN", "value": false },
+                    '5550': { "type": "BOOLEAN", "value": false },
+                    '5750': 'Navigation Lights',
+                    '5518': { "type": "INTEGER", "value": 0 }
+                },
+                '2': {  // Anchor Light
+                    '0': 'Anchor Light Control',
+                    '1': 'ALC-12V-Marine',
+                    '5500': { "type": "BOOLEAN", "value": false },
+                    '5550': { "type": "BOOLEAN", "value": false },
+                    '5750': 'Anchor Light',
+                    '5518': { "type": "INTEGER", "value": 0 }
+                },
+                '3': {  // Engine Start/Stop
+                    '0': 'Engine Control',
+                    '1': 'EC-24V-Marine',
+                    '5500': { "type": "BOOLEAN", "value": false },
+                    '5550': { "type": "BOOLEAN", "value": false },
+                    '5750': 'Engine Control',
+                    '5518': { "type": "INTEGER", "value": 0 }
+                }
+            }
+        }
+    }
+}
+```
+
+This maritime configuration provides comprehensive vessel monitoring with:
+- **Environmental Monitoring**: Temperature and humidity sensors for engine, cabin, and sea water
+- **Motion Tracking**: 3-axis accelerometer for vessel motion and stability
+- **Position Tracking**: GPS location with timestamp
+- **Energy Management**: Battery monitoring, solar generation, and shore power
+- **Power Monitoring**: Real-time power consumption for engine, electronics, and lighting
+- **Control Systems**: Digital switches for bilge pump, navigation lights, and engine control
+
+All objects use standard IPSO object IDs compatible with 1nce and other LwM2M servers, while providing maritime-specific customization through manufacturer names, model numbers, and application types.
+
 ## Empty string/null resource value handling for numeric and boolean types
 
 You can choose the way to handle an empty string/null resource value by describing them in your `settings.js` or `RED.settings` objects.
@@ -493,41 +690,67 @@ $ npm test
 
 The prebuilt binaries are available for the following OS and architectures:
 
-1. ARM(armv6+) Linux with Node.js v10/12 (For Raspberry Pi, ASUS tinker board and other ARMv6+ CPU computers)
-1. x64 Linux with Node.js v10/12
-1. macOS with Node.js v10/12
+1. **ARM64 Linux with Node.js v20/22** (For Raspberry Pi 4/5, ASUS tinker board and other ARMv8+ CPU computers)
+1. **x64 Linux with Node.js v20/22** 
+1. **macOS with Node.js v20/22** (Intel and Apple Silicon)
 
 Other users need to install the following software manually:
 
-1. GCC (4.8+)
-1. make
+1. **GCC (7.0+)** or **Clang**
+1. **make**
+1. **Python 3.x** (for node-gyp)
 
 ## Node-RED users
 
 Use `Manage palette` menu to install this node.
 
 Or run the following commands in a terminal:
-```
+```bash
 cd ~/.node-red
 npm install --production node-red-contrib-lwm2m
 ```
 
 Then restart Node-RED process.
 
-## CANDY RED users
+## SignalK users
+
+Install via SignalK App Store or manually:
+
+```bash
+# Via SignalK server npm install
+npm install --production node-red-contrib-lwm2m
+
+# Or for Docker-based SignalK installations
+docker exec signalk-server npm install --production node-red-contrib-lwm2m
+```
+
+Then restart SignalK server.
+
+## CANDY RED users - discontinued here
 
 Use `Manage palette` menu to install this node.
 
 Or run the following commands in a terminal:
-```
+```bash
 cd /opt/candy-red/.node-red
 sudo npm install --unsafe-perm --production node-red-contrib-lwm2m
 ```
 
 Then restart `candy-red` service.
 
-```
+```bash
 sudo systemctl restart candy-red
+```
+
+## Development Installation
+
+For development or building from source:
+
+```bash
+git clone https://github.com/mukulele/node-red-contrib-lwm2m.git
+cd node-red-contrib-lwm2m
+npm install
+npm run build
 ```
 
 # Example Flows

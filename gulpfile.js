@@ -16,32 +16,18 @@
  */
 
 const gulp        = require('gulp');
-const noop        = require("gulp-noop");
 const babel       = require('gulp-babel');
 const uglify      = require('gulp-uglify');
 const del         = require('del').deleteAsync;
-const jshint      = require('gulp-jshint');
 const mocha       = require('gulp-mocha').default;
 const sourcemaps  = require('gulp-sourcemaps');
 const gulpif      = require('gulp-if');
-const htmlmin     = require('gulp-htmlmin');
 const cleancss    = require('gulp-clean-css');
-const less        = require('gulp-less');
-const manifest    = require('gulp-manifest');
 const yaml        = require('gulp-yaml');
 
 const minified = process.env.NODE_ENV !== 'development';
 const sourcemapEnabled = !minified;
 
-gulp.task('lint', () => {
-  return gulp.src([
-    './tests/**/*.js',
-    './lib/**/*.js'
-  ])
-  .pipe(jshint())
-  .pipe(jshint.reporter('jshint-stylish'))
-  .pipe(jshint.reporter('fail'));
-});
 
 gulp.task('clean', () => {
   return del([
@@ -75,10 +61,9 @@ gulp.task('assets', gulp.series('i18n', () => {
 
 gulp.task('js', gulp.series('assets', () => {
   return gulp.src('./lib/**/*.js')
-    .pipe(gulpif(sourcemapEnabled, sourcemaps.init(), noop()))
+    .pipe(gulpif(sourcemapEnabled, sourcemaps.init()))
     .pipe(babel({
-      presets: ["@babel/preset-env"],
-      plugins: ['add-module-exports']
+      presets: ["@babel/preset-env"]
     }))
     .pipe(gulpif(!sourcemapEnabled, uglify({
       mangle: minified,
@@ -96,36 +81,15 @@ gulp.task('js', gulp.series('assets', () => {
         conditionals: true,
         unsafe_math: true,
         unsafe: true
-      },
-    }), noop()))
-    .pipe(gulpif(sourcemapEnabled, sourcemaps.write('.'), noop()))
+      }
+    })))
+    .pipe(gulpif(sourcemapEnabled, sourcemaps.write('.')))
     .pipe(gulp.dest('./dist'));
 }));
 
-gulp.task('less', () => {
-  return gulp.src('./lib/**/*.less')
-    .pipe(gulpif(sourcemapEnabled, sourcemaps.init(), noop()))
-    .pipe(less())
-    .pipe(cleancss({compatibility: 'ie8'}))
-    .pipe(gulpif(sourcemapEnabled, sourcemaps.write('.'), noop()))
-    .pipe(gulp.dest('./dist'));
-});
 
-gulp.task('html', () => {
-  return gulp.src([
-      './lib/**/*.html',
-      '!./lib/nodes/*/node_modules/**/*.html',
-    ])
-    .pipe(htmlmin({
-      collapseWhitespace: true,
-      conservativeCollapse: true,
-      minifyJS: true, minifyCSS: true,
-      removeComments: true
-    }))
-    .pipe(gulp.dest('./dist'));
-});
 
-gulp.task('build', gulp.series('lint', 'js', 'less', 'html', 'assets'));
+gulp.task('build', gulp.series('js', 'assets'));
 
 gulp.task('testAssets', () => {
   return gulp.src('./tests/**/*.{css,less,ico,png,html,json,yaml,yml}')
@@ -136,8 +100,7 @@ gulp.task('testJs', gulp.series('cleanTestJs', 'build', () => {
   return gulp.src('./tests/**/*.js')
     .pipe(sourcemaps.init())
     .pipe(babel({
-      presets: ['@babel/preset-env'],
-      plugins: ['add-module-exports']
+      presets: ['@babel/preset-env']
     }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist'));

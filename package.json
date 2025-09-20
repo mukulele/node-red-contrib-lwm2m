@@ -51,34 +51,20 @@
     "@babel/core": "^7.28.4",
     "@babel/plugin-transform-runtime": "^7.28.3",
     "@babel/preset-env": "^7.28.3",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
     "babel-preset-minify": "^0.3.0",
     "chai": "^6.0.1",
-    "del": "^8.0.0",
+    "del": "^7.0.0",
     "gulp": "^5.0.1",
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-cli": "^3.1.0",
-    "gulp-header": "^2.0.9",
-    "gulp-htmlmin": "^5.0.1",
     "gulp-if": "^3.0.0",
-    "gulp-jshint": "^2.1.0",
-    "gulp-less": "^5.0.0",
-    "gulp-manifest": "^0.1.1",
     "gulp-mocha": "^10.0.1",
-    "gulp-noop": "^1.0.1",
-    "gulp-resources": "^0.5.0",
-    "gulp-sourcemaps": "^3.0.0",
+    "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "gulp-yaml": "^2.0.4",
-    "jshint": "^2.12.0",
-    "jshint-stylish": "^2.2.1",
     "mocha": "^11.7.2",
-    "node-gyp": "^5.1.1",
+    "node-gyp": "^11.4.2",
     "node-pre-gyp-github": "git+https://github.com/OpenWebCAD/node-pre-gyp-github.git",
     "sinon": "^21.0.0",
     "sinon-chai": "^4.0.1",
@@ -86,16 +72,18 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.28.4",
-    "debug": "^4.3.1",
+    "debug": "^4.3.4",
     "node-addon-api": "^8.5.0",
-    "node-pre-gyp": "^0.14.0",
-    "source-map-support": "^0.4.2",
-    "systeminformation": "^5.3.1"
+    "node-pre-gyp": "^0.17.0",
+    "source-map-support": "^0.5.21",
+    "systeminformation": "^5.23.7"
   },
   "node-red": {
     "nodes": {
       "lwm2m": "dist/lwm2m.js"
     }
-    }
-  
+  },
+  "bundleDependencies": [
+    "node-pre-gyp"
+  ]
 }

@@ -684,6 +684,21 @@ $ npm run build
 $ npm test
 ```
 
+Bash-Skript, das gleichzeitig
+den wakatiwai-Client per strace auf stdin/stdout (read/write) überwacht
+den externen UDP-Traffic zum Bootstrap-Server (lwm2m.os.1nce.com:5683) per tcpdump mitschneidet
+und alles in ein logs/-Verzeichnis schreibt.
+
+```bash
+chmod +x capture_wakatiwai.sh
+./capture_wakatiwai.sh
+```
+
+Das Skript wartet automatisch, bis Node-RED den wakatiwai-Prozess gestartet hat.
+Dann werden zwei Dateien erzeugt:
+logs/ipc.log → strace-Log mit Hex-Dumps von stdin/stdout des Clients (IPC mit Node-RED).
+Beenden: ENTER drücken.
+
 # How to install
 
 ## Prebuilt Binaries
@@ -725,22 +740,6 @@ docker exec signalk-server npm install --production node-red-contrib-lwm2m
 ```
 
 Then restart SignalK server.
-
-## CANDY RED users - discontinued here
-
-Use `Manage palette` menu to install this node.
-
-Or run the following commands in a terminal:
-```bash
-cd /opt/candy-red/.node-red
-sudo npm install --unsafe-perm --production node-red-contrib-lwm2m
-```
-
-Then restart `candy-red` service.
-
-```bash
-sudo systemctl restart candy-red
-```
 
 ## Development Installation
 
